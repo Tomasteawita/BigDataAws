@@ -51,3 +51,33 @@ Características:
 * Consumer: Toma los datos records de kinesis streams procesarlos
 * Shard: Es una secuencia d data record dentro de un stream
 * Se usa para agrupar la data por shard dentro de un stream.
+
+### Creación de Kinesis Data Streams
+
+1. Ir a get started
+2. Elegimos nuestro kinesis data stream, hay diferentes tipos de streams, en nuestro caso es simplemente Data Stream
+3. Ponemos un nombre al stream
+4. Determinamos la cantidad de Shards
+   1. Este numero depende de la cantidad de trafico que nos va a llegar, en base a esa entrada vamos a calcular los shards
+   2. Ejemplo: ![alt text](image.png)
+5. Creamos el create data stream
+6. Una vez terminamos, podemos ver más detalles:
+
+#### Detalles
+* Generic
+   * Stream ARN
+   * Status
+   * Sending data to stream: Puede ser via API o servicios Serverless
+   * Server-side encryption: Encriptación de los datos en el stream. (Servicio basado en KMS)
+   * Data Retention Period: Tiempo que los datos van a estar disponibles en el stream, por defecto 24hs, pero se puede aumentar hasta 7 días.
+   * Shard level metrics; Podemos integrar Kinesis con cloudwatch para monitorear el stream con métricas como:
+     * IncomingBytes
+     * IncomingRecords
+     * WriteProvisionedThroughputExceeded
+     * GetRecords.IteratorAgeMilliseconds
+
+* Monitoring
+* Tags
+
+### Creación de kinesos con cloudformation
+Para ver la creción de un stream con cloudformation, ver el archivo `kinesis.yaml` en la carpeta `cloudformation`.

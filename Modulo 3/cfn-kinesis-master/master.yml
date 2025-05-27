@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Master stack file to create an infrastructure by stacks.
+Parameters:
+    
+    EnvironmentName: 
+        Description: "Select the Environment Name to Deploy"
+        Type: String
+        Default: PREPROD
+        AllowedValues:
+            - DEV
+            - STG
+            - PRD
+            - PREPROD
+            - TEST
+    KinesisShardsNumber: # con esto especifico la cantidad de shards que quiero crear
+        Description: "Select the number of shards"
+        Type: Number
+        Default: 1
+        
+Resources:
+    KinesisStream:
+        Type: "AWS::CloudFormation::Stack"
+        Properties:
+            # Referencia a otra plantilla que despliega el kinesis como tal
+            TemplateURL: https://s3.amazonaws.com/my_bucket/rt/kinesis-distribution.yml 
+            Parameters:
+                EnvironmentName: !Ref EnvironmentName # Aca se envia el environment name
+                KinesisShardsNumber:
+                    !Ref KinesisShardsNumber # Aca se envian los shards
+
+
+ 
